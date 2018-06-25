@@ -1,14 +1,23 @@
 package Main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.Timer;
+
 public class Listener implements KeyListener {
+	private static final int MS_BETWEEN_MOVEMENT = 100;
+	
 	private ArrayList<Moves> moves;
+	private TemporalLimiter movementCheck;
 	
 	public Listener() {
 		moves = new ArrayList<Moves>(2);
+		
+		this.movementCheck = new TemporalLimiter(MS_BETWEEN_MOVEMENT);
 	}
 
 	public ArrayList<Moves> getMoves() {
@@ -25,28 +34,36 @@ public class Listener implements KeyListener {
 				if (shiftSelected) {
 					moves.add(Moves.ROTATE_LEFT);
 				} else {
-					moves.add(Moves.LEFT);
+					if (movementCheck.isReady()) {
+						moves.add(Moves.LEFT);
+					}
 				}
 				break;
 			case KeyEvent.VK_UP:
 				if (shiftSelected) {
 					moves.add(Moves.ROTATE_UP);
 				} else {
-					moves.add(Moves.UP);
+					if (movementCheck.isReady()) {
+						moves.add(Moves.UP);
+					}
 				}
 				break;
 			case KeyEvent.VK_RIGHT:
 				if (shiftSelected) {
 					moves.add(Moves.ROTATE_RIGHT);
 				} else {
-					moves.add(Moves.RIGHT);
+					if (movementCheck.isReady()) {
+						moves.add(Moves.RIGHT);
+					}
 				}
 				break;
 			case KeyEvent.VK_DOWN:
 				if (shiftSelected) {
 					moves.add(Moves.ROTATE_DOWN);
 				} else {
-					moves.add(Moves.DOWN);
+					if (movementCheck.isReady()) {
+						moves.add(Moves.DOWN);
+					}
 				}
 				break;
 		}

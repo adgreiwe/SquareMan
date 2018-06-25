@@ -3,7 +3,6 @@ package Main;
 import java.awt.Canvas;
 import java.awt.Frame;
 import java.awt.event.*;
-import java.awt.Panel;
 import javax.swing.Timer;
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class Engine {
 	private static final int GAME_HEIGHT = 600;
 	private static final int SQUARE_WIDTH = 50;
 	
-	private static Timer timer;
+	private static Timer frameTimer;
 	private static int frameNum;
 	private static int fps;
 	
@@ -68,7 +67,7 @@ public class Engine {
 				frameNum++;
 			}
 		};
-		timer = new Timer(fps, frameChanger);
+		frameTimer = new Timer(fps, frameChanger);
 	}
 	
 	private void interpretMoves(ArrayList<Moves> moves) {
@@ -154,6 +153,6 @@ public class Engine {
 	}
 	
 	public static void runGame() {
-		timer.start();
+		frameTimer.start();
 	}
 }
