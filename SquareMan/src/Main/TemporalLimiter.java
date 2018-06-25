@@ -13,7 +13,6 @@ public class TemporalLimiter {
 	public TemporalLimiter(int delay) {
 		ActionListener readyToggler = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				System.out.println("now ready");
 				ready = true;
 			}
 		};
